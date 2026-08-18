@@ -333,6 +333,12 @@ const T = {
 
 const YEARS = Math.floor((Date.now() - new Date('2018-02-19')) / (365.25 * 24 * 3600 * 1000));
 
+function setParam(key, value){
+  const p = new URLSearchParams(location.search);
+  p.set(key, value);
+  history.replaceState(null, '', '?' + p);
+}
+
 function setLang(lang){
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -341,8 +347,8 @@ function setLang(lang){
   document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   localStorage.setItem('lang', lang);
+  setParam('lang', lang);
 }
-setLang(localStorage.getItem('lang') || 'en');
 
 const THEMES = ['light', 'dark', 'classic'];
 function applyTheme(theme){
@@ -350,9 +356,15 @@ function applyTheme(theme){
   THEMES.forEach(t =>
     document.getElementById('btn-theme-' + t).classList.toggle('active', t === theme));
   localStorage.setItem('theme', theme);
+  setParam('theme', theme);
 }
-const saved = localStorage.getItem('theme');
-applyTheme(THEMES.includes(saved) ? saved :
+
+const params = new URLSearchParams(location.search);
+const urlLang = params.get('lang'), urlTheme = params.get('theme');
+setLang(urlLang in T ? urlLang : (localStorage.getItem('lang') in T ? localStorage.getItem('lang') : 'en'));
+const savedTheme = localStorage.getItem('theme');
+applyTheme(THEMES.includes(urlTheme) ? urlTheme :
+  THEMES.includes(savedTheme) ? savedTheme :
   (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
 // ponytail: fake local hit counter, real analytics if it ever matters
