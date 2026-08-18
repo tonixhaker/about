@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anton Danilov — Senior Full-Stack Developer</title>
+<meta name="description" content="Anton Danilov — Senior Full-Stack Developer. TypeScript, NestJS, React, Next.js, React Native, AWS.">
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --text:#e8eaf0; --muted:#9aa1b0;
+    --accent:#6ea8fe; --border:#262b36;
+  }
+  [data-theme="light"]{
+    --bg:#f6f7f9; --card:#ffffff; --text:#1c2230; --muted:#5b6472;
+    --accent:#2563eb; --border:#dde1e8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+
+  header{display:flex;justify-content:flex-end;gap:10px;padding:20px 0}
+  #btn-theme{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px;color:var(--muted)}
+  .lang button{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;cursor:pointer;font-size:14px}
+  .lang button:first-child{border-radius:8px 0 0 8px}
+  .lang button:last-child{border-radius:0 8px 8px 0;border-left:none}
+  .lang button.active{background:var(--accent);border-color:var(--accent);color:#0b1020;font-weight:600}
+
+  .hero{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin:24px 0 48px}
+  .hero img{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid var(--border)}
+  .hero h1{font-size:2.2rem;line-height:1.2}
+  .hero .role{color:var(--accent);font-size:1.15rem;margin-top:4px}
+  .hero .loc{color:var(--muted);margin-top:8px;font-size:.95rem}
+
+  h2{font-size:1.3rem;margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  .about p{margin-bottom:12px;color:var(--text)}
+
+  .skills{display:grid;gap:10px}
+  .skills div{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+  .skills b{color:var(--accent)}
+
+  .job{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .job h3{font-size:1.05rem}
+  .job .period{color:var(--muted);font-size:.9rem;margin-bottom:10px}
+  .job ul{padding-left:20px;color:var(--text)}
+  .job li{margin:6px 0}
+
+  .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .proj{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .proj h3{font-size:1rem;margin-bottom:2px}
+  .proj .stack{color:var(--muted);font-size:.82rem;margin-bottom:8px}
+  .proj p{font-size:.92rem;color:var(--text)}
+
+  .contact{display:flex;flex-wrap:wrap;gap:12px 24px;list-style:none}
+  .contact li{color:var(--muted)}
+
+  footer{margin-top:60px;color:var(--muted);font-size:.85rem;text-align:center}
+  @media (max-width:520px){.hero{justify-content:center;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <button id="btn-theme" onclick="toggleTheme()"></button>
+    <div class="lang">
+      <button id="btn-uk" onclick="setLang('uk')">UA</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="avatar.jpeg" alt="Anton Danilov">
+    <div>
+      <h1>Anton Danilov</h1>
+      <div class="role" data-i18n="role"></div>
+      <div class="loc" data-i18n="loc"></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2 data-i18n="aboutTitle"></h2>
+    <p data-i18n="about1"></p>
+    <p data-i18n="about2"></p>
+    <p data-i18n="about3"></p>
+  </section>
+
+  <section>
+    <h2 data-i18n="skillsTitle"></h2>
+    <div class="skills">
+      <div><b data-i18n="skLang"></b>: JavaScript / TypeScript, PHP, SQL</div>
+      <div><b>Backend</b>: NestJS, Express, Laravel, REST APIs, WebSockets</div>
+      <div><b>Frontend</b>: React, Next.js, Vue, Nuxt, AngularJS</div>
+      <div><b data-i18n="skMobile"></b>: React Native, Flutter, Cordova, Electron</div>
+      <div><b>DevOps / Infra</b>: AWS (EC2, RDS, S3), Docker, Nginx, PM2, Linux, CI/CD</div>
+      <div><b>AI Tooling</b>: <span data-i18n="skAI"></span></div>
+      <div><b data-i18n="skLead"></b>: <span data-i18n="skLeadBody"></span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i18n="expTitle"></h2>
+    <div class="job">
+      <h3 data-i18n="role"></h3>
+      <div class="period" data-i18n="expPeriod"></div>
+      <ul>
+        <li data-i18n="exp1"></li>
+        <li data-i18n="exp2"></li>
+        <li data-i18n="exp3"></li>
+        <li data-i18n="exp4"></li>
+        <li data-i18n="exp5"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i18n="projTitle"></h2>
+    <div class="projects">
+      <div class="proj"><h3><a href="https://get.clubee.com" target="_blank" rel="noopener">Clubee</a></h3><div class="stack">Frontend Lead · React</div><p data-i18n="pClubee"></p></div>
+      <div class="proj"><h3><a href="https://mvix.com" target="_blank" rel="noopener">Mvix</a></h3><div class="stack">Vue, React, Laravel</div><p data-i18n="pMvix"></p></div>
+      <div class="proj"><h3><a href="https://sketchandcalc.com" target="_blank" rel="noopener">SketchAndCalc</a></h3><div class="stack">React Native, Express, Electron, Cordova</div><p data-i18n="pSketch"></p></div>
+      <div class="proj"><h3><a href="https://primer-app.com" target="_blank" rel="noopener">Primer</a></h3><div class="stack">Flutter, NestJS</div><p data-i18n="pPrimer"></p></div>
+      <div class="proj"><h3>RocketCrash</h3><div class="stack">Node.js, Telegram Mini Apps</div><p data-i18n="pRocket"></p></div>
+      <div class="proj"><h3 data-i18n="tInspect"></h3><div class="stack">React Native, Next.js, Laravel</div><p data-i18n="pInspect"></p></div>
+      <div class="proj"><h3 data-i18n="tPedestal"></h3><div class="stack">AngularJS, Laravel</div><p data-i18n="pPedestal"></p></div>
+      <div class="proj"><h3 data-i18n="tRebelvest"></h3><div class="stack">React, Laravel</div><p data-i18n="pRebelvest"></p></div>
+      <div class="proj"><h3 data-i18n="tHagedoo"></h3><div class="stack">Next.js, Laravel</div><p data-i18n="pHagedoo"></p></div>
+      <div class="proj"><h3 data-i18n="tBanger"></h3><div class="stack">Nuxt, Laravel</div><p data-i18n="pBanger"></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i18n="langTitle"></h2>
+    <ul class="contact">
+      <li data-i18n="langEn"></li>
+      <li data-i18n="langNative"></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 data-i18n="contactTitle"></h2>
+    <ul class="contact">
+      <li><a href="mailto:tonixhaker@gmail.com">tonixhaker@gmail.com</a></li>
+      <li><a href="tel:+380668537744">+380 66 853 77 44</a></li>
+      <li><a href="https://github.com/tonixhaker" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://linkedin.com/in/anton-danilov-3ba631146" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <footer>© 2026 Anton Danilov</footer>
+</div>
+
+<script>
+const T = {
+  en: {
+    role: "Senior Full-Stack Developer",
+    loc: "Kyiv region, Ukraine",
+    aboutTitle: "About Me",
+    about1: "Full-stack engineer with {years}+ years of commercial experience building web, mobile and desktop products.",
+    about2: "Delivered and maintained 9+ production platforms for clients in the US, Germany, Luxembourg, Spain and Australia — SaaS, fintech/crowdfunding, marketplaces, gaming and mobile apps.",
+    about3: "Core stack: TypeScript/JavaScript across the whole cycle (NestJS, Express, React, Next.js, React Native), solid PHP/Laravel background. Hands-on with AWS infrastructure and AI-assisted development workflows (Claude Code, custom agents, MCP).",
+    skillsTitle: "Skills",
+    skLang: "Languages",
+    skMobile: "Mobile & Desktop",
+    skAI: "Claude Code environments — custom agents, commands, skills; MCP servers",
+    skLead: "Leadership",
+    skLeadBody: "project & sprint planning, task decomposition, code review, mentoring, client communication",
+    expTitle: "Experience",
+    expPeriod: "Feb 2018 – Present ({years}+ years) · Full-stack development on client projects (web, mobile, desktop)",
+    exp1: "Work on several large projects in parallel across the whole stack.",
+    exp2: "Own the full delivery cycle: requirements analysis, architecture decisions, task planning and decomposition, estimation, code review and releases.",
+    exp3: "Coordinate development teams and communicate directly with clients; act as the main problem-solver on technical and process issues.",
+    exp4: "Set up and maintain cloud infrastructure: AWS EC2 / RDS / S3, Nginx, Docker, PM2, zero-downtime deployments.",
+    exp5: "Introduced AI-assisted workflows: configured Claude Code environments with custom agents, commands and skills to speed up development and code review.",
+    projTitle: "Selected Projects",
+    pClubee: "All-in-one management platform for sports clubs and federations, used by 45+ national federations. Led the frontend team.",
+    pMvix: "Enterprise digital signage platform: cloud CMS for content, playlists and schedules across networks of screens.",
+    pSketch: "Area calculator for irregular shapes — mobile, web and desktop from a shared codebase, with app store releases.",
+    pInspect: "Platform for home inspectors: field mobile app with offline sync, visual report builder and cloud report delivery.",
+    pPedestal: "No-code website builder for trade businesses with templates for 200+ industries; multi-tenant backend for hundreds of live sites.",
+    pRebelvest: "Debt-based crowdinvesting platform for sustainable energy: investor onboarding, checkout and investment accounting in a regulated German fintech context.",
+    pHagedoo: "Platform of a major German DIY retail network connecting homeowners with vetted craftsmen: SSR questionnaire flows, partner matching and offers.",
+    pBanger: "Blockchain-powered gaming hub: tournaments, lobbies, reward mechanics and wallet integration.",
+    pPrimer: "Education app for parents of 4–14 year olds: guided Q&A sessions, reminders and progress tracking.",
+    pRocket: "Gamified crypto crash-game as a Telegram mini app: bets, multipliers, real-time rounds, referrals.",
+    langTitle: "Languages",
+    langEn: "English — Intermediate (B1)",
+    langNative: "Ukrainian — native",
+    contactTitle: "Contact",
+    tInspect: "Home Inspection Platform (US)",
+    tPedestal: "No-code Website Builder (Australia)",
+    tRebelvest: "Crowdinvesting Platform (Germany)",
+    tHagedoo: "Craftsmen Marketplace (Germany)",
+    tBanger: "Gaming Hub (Spain)"
+  },
+  uk: {
+    role: "Senior Full-Stack розробник",
+    loc: "Київська область, Україна",
+    aboutTitle: "Про мене",
+    about1: "Full-stack інженер з {years}+ роками комерційного досвіду розробки веб, мобільних та десктоп продуктів.",
+    about2: "Розробив і підтримував 9+ продакшн-платформ для клієнтів зі США, Німеччини, Люксембургу, Іспанії та Австралії — SaaS, фінтех/краудфандинг, маркетплейси, ігрові та мобільні застосунки.",
+    about3: "Основний стек: TypeScript/JavaScript на всьому циклі (NestJS, Express, React, Next.js, React Native), міцний бекграунд у PHP/Laravel. Практичний досвід з інфраструктурою AWS та AI-асистованою розробкою (Claude Code, кастомні агенти, MCP).",
+    skillsTitle: "Навички",
+    skLang: "Мови програмування",
+    skMobile: "Мобільна та десктоп розробка",
+    skAI: "Середовища Claude Code — кастомні агенти, команди, скіли; MCP-сервери",
+    skLead: "Лідерство",
+    skLeadBody: "планування проєктів і спринтів, декомпозиція задач, код-рев'ю, менторство, комунікація з клієнтами",
+    expTitle: "Досвід роботи",
+    expPeriod: "Лютий 2018 – дотепер ({years}+ років) · Full-stack розробка на клієнтських проєктах (веб, мобайл, десктоп)",
+    exp1: "Працюю над кількома великими проєктами паралельно на всьому стеку.",
+    exp2: "Відповідаю за повний цикл доставки: аналіз вимог, архітектурні рішення, планування та декомпозиція задач, оцінка, код-рев'ю та релізи.",
+    exp3: "Координую команди розробки та спілкуюся напряму з клієнтами; головний вирішувач технічних і процесних питань.",
+    exp4: "Налаштовую та підтримую хмарну інфраструктуру: AWS EC2 / RDS / S3, Nginx, Docker, PM2, деплой без даунтайму.",
+    exp5: "Впровадив AI-асистовані процеси: налаштував середовища Claude Code з кастомними агентами, командами та скілами для прискорення розробки та код-рев'ю.",
+    projTitle: "Вибрані проєкти",
+    pClubee: "Комплексна платформа управління для спортивних клубів і федерацій, використовується 45+ національними федераціями. Керував фронтенд-командою.",
+    pMvix: "Корпоративна платформа digital signage: хмарна CMS для контенту, плейлистів та розкладів на мережах екранів.",
+    pSketch: "Калькулятор площі неправильних фігур — мобайл, веб і десктоп зі спільної кодової бази, з релізами в app store.",
+    pInspect: "Платформа для інспекторів нерухомості: мобільний застосунок з офлайн-синхронізацією, конструктор звітів і хмарна доставка звітів.",
+    pPedestal: "No-code конструктор сайтів для локального бізнесу з шаблонами для 200+ галузей; мультитенантний бекенд для сотень живих сайтів.",
+    pRebelvest: "Краудінвестингова платформа для сталої енергетики: онбординг інвесторів, чекаут та облік інвестицій у регульованому німецькому фінтеху.",
+    pHagedoo: "Платформа великої німецької DIY-мережі, що з'єднує власників житла з перевіреними майстрами: SSR-анкети, підбір партнерів та пропозиції.",
+    pBanger: "Блокчейн-ігровий хаб: турніри, лобі, механіки винагород та інтеграція з гаманцем.",
+    pPrimer: "Освітній застосунок для батьків дітей 4–14 років: керовані Q&A-сесії, нагадування та прогрес.",
+    pRocket: "Гейміфікована крипто-гра crash як Telegram mini app: ставки, множники, раунди в реальному часі, реферали.",
+    langTitle: "Мови",
+    langEn: "Англійська — Intermediate (B1)",
+    langNative: "Українська — рідна",
+    contactTitle: "Контакти",
+    tInspect: "Платформа для інспекції нерухомості (США)",
+    tPedestal: "No-code конструктор сайтів (Австралія)",
+    tRebelvest: "Краудінвестингова платформа (Німеччина)",
+    tHagedoo: "Маркетплейс майстрів (Німеччина)",
+    tBanger: "Ігровий хаб (Іспанія)"
+  }
+};
+
+const YEARS = Math.floor((Date.now() - new Date('2018-02-19')) / (365.25 * 24 * 3600 * 1000));
+
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = T[lang][el.dataset.i18n].replace('{years}', YEARS);
+  });
+  document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  localStorage.setItem('lang', lang);
+}
+setLang(localStorage.getItem('lang') || 'uk');
+
+function applyTheme(theme){
+  document.documentElement.dataset.theme = theme;
+  document.getElementById('btn-theme').textContent = theme === 'light' ? 'Dark' : 'Light';
+  localStorage.setItem('theme', theme);
+}
+function toggleTheme(){
+  applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+}
+applyTheme(localStorage.getItem('theme') ||
+  (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+</script>
+</body>
+</html>
