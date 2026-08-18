@@ -7,102 +7,151 @@
 <meta name="description" content="Anton Danilov — Senior Full-Stack Developer. TypeScript, NestJS, React, Next.js, React Native, AWS.">
 <style>
   :root{
-    --bg:#0f1115; --card:#171a21; --text:#e8eaf0; --muted:#9aa1b0;
-    --accent:#6ea8fe; --border:#262b36;
+    --bg:#008080; --page:#c0c0c0; --panel:#ffffff; --text:#000000; --muted:#444444;
+    --title-bg:#000080; --title-fg:#ffffff; --link:#0000ee; --visited:#551a8b;
+    --hl:#ffff00; --border-light:#ffffff; --border-dark:#808080;
   }
-  [data-theme="light"]{
-    --bg:#f6f7f9; --card:#ffffff; --text:#1c2230; --muted:#5b6472;
-    --accent:#2563eb; --border:#dde1e8;
+  [data-theme="dark"]{
+    --bg:#000000; --page:#0a0a0a; --panel:#000000; --text:#00ff00; --muted:#00aa00;
+    --title-bg:#003300; --title-fg:#00ff00; --link:#00ffff; --visited:#00cc99;
+    --hl:#003300; --border-light:#00ff00; --border-dark:#005500;
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:860px;margin:0 auto;padding:0 20px 60px}
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:16px 8px;
+    background:var(--bg);
+    background-image:repeating-linear-gradient(45deg, transparent 0 10px, rgba(0,0,0,.08) 10px 20px);
+    color:var(--text);
+    font-family:"Times New Roman", Times, serif;
+    font-size:17px; line-height:1.45;
+  }
+  a{color:var(--link)} a:visited{color:var(--visited)}
+  .page{
+    max-width:820px; margin:0 auto; background:var(--page);
+    border:2px outset var(--border-light); padding:4px;
+  }
+  .titlebar{
+    background:var(--title-bg); color:var(--title-fg);
+    font-family:"Comic Sans MS","Comic Sans",cursive;
+    font-weight:bold; padding:4px 8px; font-size:15px;
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+  }
+  .titlebar .x{border:2px outset var(--border-light); background:var(--page); color:var(--text); padding:0 6px; font-family:monospace}
+  .inner{padding:10px}
+  .btn{
+    font-family:"MS Sans Serif",Tahoma,sans-serif; font-size:13px;
+    background:var(--page); color:var(--text);
+    border:2px outset var(--border-light); padding:3px 12px; cursor:pointer;
+  }
+  .btn:active{border-style:inset}
+  .btn.active{border-style:inset; background:var(--hl)}
+  .toolbar{display:flex; gap:6px; justify-content:flex-end; padding:6px 10px 0}
 
-  header{display:flex;justify-content:flex-end;gap:10px;padding:20px 0}
-  #btn-theme{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px;color:var(--muted)}
-  .lang button{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;cursor:pointer;font-size:14px}
-  .lang button:first-child{border-radius:8px 0 0 8px}
-  .lang button:last-child{border-radius:0 8px 8px 0;border-left:none}
-  .lang button.active{background:var(--accent);border-color:var(--accent);color:#0b1020;font-weight:600}
+  marquee, .marq{
+    display:block; background:var(--panel); border:2px inset var(--border-light);
+    color:red; font-family:"Comic Sans MS","Comic Sans",cursive; font-weight:bold;
+    padding:3px 0; margin:8px 0;
+  }
+  [data-theme="dark"] marquee{color:#00ff00}
 
-  .hero{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin:24px 0 48px}
-  .hero img{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid var(--border)}
-  .hero h1{font-size:2.2rem;line-height:1.2}
-  .hero .role{color:var(--accent);font-size:1.15rem;margin-top:4px}
-  .hero .loc{color:var(--muted);margin-top:8px;font-size:.95rem}
+  .hero{text-align:center; padding:10px 0}
+  .hero img{
+    width:160px; height:160px; object-fit:cover; object-position:top;
+    border:6px ridge var(--border-dark);
+  }
+  h1{
+    font-family:"Comic Sans MS","Comic Sans",cursive; margin:10px 0 0;
+    font-size:2rem;
+    background:linear-gradient(90deg,red,orange,#cc0,green,blue,purple);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  [data-theme="dark"] h1{background:none; color:#00ff00; text-shadow:0 0 6px #00ff00}
+  .role{font-style:italic; font-size:1.1rem}
+  .blink{animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
 
-  h2{font-size:1.3rem;margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-  .about p{margin-bottom:12px;color:var(--text)}
+  h2{
+    background:var(--title-bg); color:var(--title-fg);
+    font-family:"Comic Sans MS","Comic Sans",cursive; font-size:1.05rem;
+    padding:3px 10px; margin:22px 0 10px; border:2px outset var(--border-light);
+  }
+  h2::before{content:"*** "} h2::after{content:" ***"}
 
-  .skills{display:grid;gap:10px}
-  .skills div{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
-  .skills b{color:var(--accent)}
+  .panel{background:var(--panel); border:2px inset var(--border-light); padding:10px 14px; margin-bottom:10px}
+  ul{margin:6px 0; padding-left:24px}
+  li{margin:4px 0}
+  hr{border:none; border-top:2px inset var(--border-light); margin:14px 0}
 
-  .job{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
-  .job h3{font-size:1.05rem}
-  .job .period{color:var(--muted);font-size:.9rem;margin-bottom:10px}
-  .job ul{padding-left:20px;color:var(--text)}
-  .job li{margin:6px 0}
+  table.projects{width:100%; border-collapse:collapse}
+  table.projects td, table.projects th{
+    border:2px inset var(--border-light); background:var(--panel);
+    padding:6px 10px; vertical-align:top; font-size:.95rem;
+  }
+  table.projects th{background:var(--title-bg); color:var(--title-fg); font-family:"Comic Sans MS",cursive}
+  .stack{font-family:"Courier New",monospace; font-size:.8rem; color:var(--muted)}
 
-  .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-  .proj{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-  .proj h3{font-size:1rem;margin-bottom:2px}
-  .proj .stack{color:var(--muted);font-size:.82rem;margin-bottom:8px}
-  .proj p{font-size:.92rem;color:var(--text)}
-
-  .contact{display:flex;flex-wrap:wrap;gap:12px 24px;list-style:none}
-  .contact li{color:var(--muted)}
-
-  footer{margin-top:60px;color:var(--muted);font-size:.85rem;text-align:center}
-  @media (max-width:520px){.hero{justify-content:center;text-align:center}}
+  .center{text-align:center}
+  .badges{display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:10px 0}
+  .badge{
+    font-family:"MS Sans Serif",Tahoma,sans-serif; font-size:11px;
+    border:1px solid var(--text); padding:2px 6px; background:var(--panel); color:var(--text);
+  }
+  .counter{font-family:"Courier New",monospace; background:#000; color:#0f0; padding:2px 8px; border:2px inset var(--border-light); letter-spacing:2px}
+  footer{text-align:center; font-size:.85rem; padding:10px 0 4px}
+  @media (max-width:600px){ table.projects, table.projects tbody, table.projects tr, table.projects td{display:block; width:100%} }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <button id="btn-theme" onclick="toggleTheme()"></button>
-    <div class="lang">
-      <button id="btn-uk" onclick="setLang('uk')">UA</button>
-      <button id="btn-en" onclick="setLang('en')">EN</button>
-    </div>
-  </header>
+<div class="page">
+  <div class="titlebar">
+    <span data-i18n="winTitle"></span>
+    <span class="x">_ □ X</span>
+  </div>
 
-  <section class="hero">
-    <img src="avatar.jpeg" alt="Anton Danilov">
-    <div>
-      <h1>Anton Danilov</h1>
+  <div class="toolbar">
+    <button class="btn" id="btn-theme" onclick="toggleTheme()"></button>
+    <button class="btn" id="btn-uk" onclick="setLang('uk')">UA</button>
+    <button class="btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="inner">
+    <marquee data-i18n="marquee" scrollamount="6"></marquee>
+
+    <div class="hero">
+      <img src="avatar.jpeg" alt="Anton Danilov">
+      <h1>~*~ Anton Danilov ~*~</h1>
       <div class="role" data-i18n="role"></div>
-      <div class="loc" data-i18n="loc"></div>
+      <div data-i18n="loc"></div>
     </div>
-  </section>
 
-  <section class="about">
+    <div class="center">
+      <span class="blink" data-i18n="newBadge"></span>
+    </div>
+
     <h2 data-i18n="aboutTitle"></h2>
-    <p data-i18n="about1"></p>
-    <p data-i18n="about2"></p>
-    <p data-i18n="about3"></p>
-  </section>
-
-  <section>
-    <h2 data-i18n="skillsTitle"></h2>
-    <div class="skills">
-      <div><b data-i18n="skLang"></b>: JavaScript / TypeScript, PHP, SQL</div>
-      <div><b>Backend</b>: NestJS, Express, Laravel, REST APIs, WebSockets</div>
-      <div><b>Frontend</b>: React, Next.js, Vue, Nuxt, AngularJS</div>
-      <div><b data-i18n="skMobile"></b>: React Native, Flutter, Cordova, Electron</div>
-      <div><b>DevOps / Infra</b>: AWS (EC2, RDS, S3), Docker, Nginx, PM2, Linux, CI/CD</div>
-      <div><b>AI Tooling</b>: <span data-i18n="skAI"></span></div>
-      <div><b data-i18n="skLead"></b>: <span data-i18n="skLeadBody"></span></div>
+    <div class="panel">
+      <p data-i18n="about1"></p>
+      <p data-i18n="about2"></p>
+      <p data-i18n="about3"></p>
     </div>
-  </section>
 
-  <section>
+    <h2 data-i18n="skillsTitle"></h2>
+    <div class="panel">
+      <ul>
+        <li><b data-i18n="skLang"></b>: JavaScript / TypeScript, PHP, SQL</li>
+        <li><b>Backend</b>: NestJS, Express, Laravel, REST APIs, WebSockets</li>
+        <li><b>Frontend</b>: React, Next.js, Vue, Nuxt, AngularJS</li>
+        <li><b data-i18n="skMobile"></b>: React Native, Flutter, Cordova, Electron</li>
+        <li><b>DevOps / Infra</b>: AWS (EC2, RDS, S3), Docker, Nginx, PM2, Linux, CI/CD</li>
+        <li><b>AI Tooling</b>: <span data-i18n="skAI"></span></li>
+        <li><b data-i18n="skLead"></b>: <span data-i18n="skLeadBody"></span></li>
+      </ul>
+    </div>
+
     <h2 data-i18n="expTitle"></h2>
-    <div class="job">
-      <h3 data-i18n="role"></h3>
-      <div class="period" data-i18n="expPeriod"></div>
+    <div class="panel">
+      <b data-i18n="role"></b><br>
+      <i data-i18n="expPeriod"></i>
       <ul>
         <li data-i18n="exp1"></li>
         <li data-i18n="exp2"></li>
@@ -111,48 +160,57 @@
         <li data-i18n="exp5"></li>
       </ul>
     </div>
-  </section>
 
-  <section>
     <h2 data-i18n="projTitle"></h2>
-    <div class="projects">
-      <div class="proj"><h3><a href="https://get.clubee.com" target="_blank" rel="noopener">Clubee</a></h3><div class="stack">Frontend Lead · React</div><p data-i18n="pClubee"></p></div>
-      <div class="proj"><h3><a href="https://mvix.com" target="_blank" rel="noopener">Mvix</a></h3><div class="stack">Vue, React, Laravel</div><p data-i18n="pMvix"></p></div>
-      <div class="proj"><h3><a href="https://sketchandcalc.com" target="_blank" rel="noopener">SketchAndCalc</a></h3><div class="stack">React Native, Express, Electron, Cordova</div><p data-i18n="pSketch"></p></div>
-      <div class="proj"><h3><a href="https://primer-app.com" target="_blank" rel="noopener">Primer</a></h3><div class="stack">Flutter, NestJS</div><p data-i18n="pPrimer"></p></div>
-      <div class="proj"><h3>RocketCrash</h3><div class="stack">Node.js, Telegram Mini Apps</div><p data-i18n="pRocket"></p></div>
-      <div class="proj"><h3 data-i18n="tInspect"></h3><div class="stack">React Native, Next.js, Laravel</div><p data-i18n="pInspect"></p></div>
-      <div class="proj"><h3 data-i18n="tPedestal"></h3><div class="stack">AngularJS, Laravel</div><p data-i18n="pPedestal"></p></div>
-      <div class="proj"><h3 data-i18n="tRebelvest"></h3><div class="stack">React, Laravel</div><p data-i18n="pRebelvest"></p></div>
-      <div class="proj"><h3 data-i18n="tHagedoo"></h3><div class="stack">Next.js, Laravel</div><p data-i18n="pHagedoo"></p></div>
-      <div class="proj"><h3 data-i18n="tBanger"></h3><div class="stack">Nuxt, Laravel</div><p data-i18n="pBanger"></p></div>
-    </div>
-  </section>
+    <table class="projects">
+      <tr><td><b><a href="https://get.clubee.com" target="_blank" rel="noopener">Clubee</a></b><div class="stack">Frontend Lead · React</div></td><td data-i18n="pClubee"></td></tr>
+      <tr><td><b><a href="https://mvix.com" target="_blank" rel="noopener">Mvix</a></b><div class="stack">Vue, React, Laravel</div></td><td data-i18n="pMvix"></td></tr>
+      <tr><td><b><a href="https://sketchandcalc.com" target="_blank" rel="noopener">SketchAndCalc</a></b><div class="stack">React Native, Express, Electron, Cordova</div></td><td data-i18n="pSketch"></td></tr>
+      <tr><td><b><a href="https://primer-app.com" target="_blank" rel="noopener">Primer</a></b><div class="stack">Flutter, NestJS</div></td><td data-i18n="pPrimer"></td></tr>
+      <tr><td><b>RocketCrash</b><div class="stack">Node.js, Telegram Mini Apps</div></td><td data-i18n="pRocket"></td></tr>
+      <tr><td><b data-i18n="tInspect"></b><div class="stack">React Native, Next.js, Laravel</div></td><td data-i18n="pInspect"></td></tr>
+      <tr><td><b data-i18n="tPedestal"></b><div class="stack">AngularJS, Laravel</div></td><td data-i18n="pPedestal"></td></tr>
+      <tr><td><b data-i18n="tRebelvest"></b><div class="stack">React, Laravel</div></td><td data-i18n="pRebelvest"></td></tr>
+      <tr><td><b data-i18n="tHagedoo"></b><div class="stack">Next.js, Laravel</div></td><td data-i18n="pHagedoo"></td></tr>
+      <tr><td><b data-i18n="tBanger"></b><div class="stack">Nuxt, Laravel</div></td><td data-i18n="pBanger"></td></tr>
+    </table>
 
-  <section>
     <h2 data-i18n="langTitle"></h2>
-    <ul class="contact">
-      <li data-i18n="langEn"></li>
-      <li data-i18n="langNative"></li>
-    </ul>
-  </section>
+    <div class="panel">
+      <ul>
+        <li data-i18n="langEn"></li>
+        <li data-i18n="langNative"></li>
+      </ul>
+    </div>
 
-  <section>
     <h2 data-i18n="contactTitle"></h2>
-    <ul class="contact">
-      <li><a href="mailto:tonixhaker@gmail.com">tonixhaker@gmail.com</a></li>
-      <li><a href="tel:+380668537744">+380 66 853 77 44</a></li>
-      <li><a href="https://github.com/tonixhaker" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://linkedin.com/in/anton-danilov-3ba631146" target="_blank" rel="noopener">LinkedIn</a></li>
-    </ul>
-  </section>
+    <div class="panel center">
+      <a href="mailto:tonixhaker@gmail.com">tonixhaker@gmail.com</a> |
+      <a href="tel:+380668537744">+380 66 853 77 44</a> |
+      <a href="https://github.com/tonixhaker" target="_blank" rel="noopener">GitHub</a> |
+      <a href="https://linkedin.com/in/anton-danilov-3ba631146" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
 
-  <footer>© 2026 Anton Danilov</footer>
+    <hr>
+    <div class="center">
+      <span data-i18n="counterLabel"></span> <span class="counter" id="counter">000000</span>
+    </div>
+    <div class="badges">
+      <span class="badge">Best viewed in 800x600</span>
+      <span class="badge">Netscape Navigator 4.0 ready</span>
+      <span class="badge">Made with Notepad</span>
+      <span class="badge">Y2K compliant</span>
+    </div>
+    <footer>© 1998–2026 Anton Danilov. <span data-i18n="footerNote"></span></footer>
+  </div>
 </div>
 
 <script>
 const T = {
   en: {
+    winTitle: "C:\\WINDOWS\\Desktop\\anton_danilov.html - Internet Explorer",
+    marquee: "*** WELCOME TO MY HOMEPAGE!!! *** Senior Full-Stack Developer *** TypeScript * React * NestJS * AWS *** Thanks 4 visiting!!! ***",
+    newBadge: "NEW!! Updated 2026 !!",
     role: "Senior Full-Stack Developer",
     loc: "Kyiv region, Ukraine",
     aboutTitle: "About Me",
@@ -176,24 +234,29 @@ const T = {
     pClubee: "All-in-one management platform for sports clubs and federations, used by 45+ national federations. Led the frontend team.",
     pMvix: "Enterprise digital signage platform: cloud CMS for content, playlists and schedules across networks of screens.",
     pSketch: "Area calculator for irregular shapes — mobile, web and desktop from a shared codebase, with app store releases.",
+    pPrimer: "Education app for parents of 4–14 year olds: guided Q&A sessions, reminders and progress tracking.",
+    pRocket: "Gamified crypto crash-game as a Telegram mini app: bets, multipliers, real-time rounds, referrals.",
     pInspect: "Platform for home inspectors: field mobile app with offline sync, visual report builder and cloud report delivery.",
     pPedestal: "No-code website builder for trade businesses with templates for 200+ industries; multi-tenant backend for hundreds of live sites.",
     pRebelvest: "Debt-based crowdinvesting platform for sustainable energy: investor onboarding, checkout and investment accounting in a regulated German fintech context.",
     pHagedoo: "Platform of a major German DIY retail network connecting homeowners with vetted craftsmen: SSR questionnaire flows, partner matching and offers.",
     pBanger: "Blockchain-powered gaming hub: tournaments, lobbies, reward mechanics and wallet integration.",
-    pPrimer: "Education app for parents of 4–14 year olds: guided Q&A sessions, reminders and progress tracking.",
-    pRocket: "Gamified crypto crash-game as a Telegram mini app: bets, multipliers, real-time rounds, referrals.",
-    langTitle: "Languages",
-    langEn: "English — Intermediate (B1)",
-    langNative: "Ukrainian — native",
-    contactTitle: "Contact",
     tInspect: "Home Inspection Platform (US)",
     tPedestal: "No-code Website Builder (Australia)",
     tRebelvest: "Crowdinvesting Platform (Germany)",
     tHagedoo: "Craftsmen Marketplace (Germany)",
-    tBanger: "Gaming Hub (Spain)"
+    tBanger: "Gaming Hub (Spain)",
+    langTitle: "Languages",
+    langEn: "English — Intermediate (B1)",
+    langNative: "Ukrainian — native",
+    contactTitle: "Contact",
+    counterLabel: "You are visitor No.",
+    footerNote: "This page is under construction 4ever."
   },
   uk: {
+    winTitle: "C:\\WINDOWS\\Робочий стіл\\anton_danilov.html - Internet Explorer",
+    marquee: "*** ЛАСКАВО ПРОСИМО НА МОЮ ДОМАШНЮ СТОРІНКУ!!! *** Senior Full-Stack розробник *** TypeScript * React * NestJS * AWS *** Дякую за візит!!! ***",
+    newBadge: "NEW!! Оновлено 2026 !!",
     role: "Senior Full-Stack розробник",
     loc: "Київська область, Україна",
     aboutTitle: "Про мене",
@@ -217,22 +280,24 @@ const T = {
     pClubee: "Комплексна платформа управління для спортивних клубів і федерацій, використовується 45+ національними федераціями. Керував фронтенд-командою.",
     pMvix: "Корпоративна платформа digital signage: хмарна CMS для контенту, плейлистів та розкладів на мережах екранів.",
     pSketch: "Калькулятор площі неправильних фігур — мобайл, веб і десктоп зі спільної кодової бази, з релізами в app store.",
+    pPrimer: "Освітній застосунок для батьків дітей 4–14 років: керовані Q&A-сесії, нагадування та прогрес.",
+    pRocket: "Гейміфікована крипто-гра crash як Telegram mini app: ставки, множники, раунди в реальному часі, реферали.",
     pInspect: "Платформа для інспекторів нерухомості: мобільний застосунок з офлайн-синхронізацією, конструктор звітів і хмарна доставка звітів.",
     pPedestal: "No-code конструктор сайтів для локального бізнесу з шаблонами для 200+ галузей; мультитенантний бекенд для сотень живих сайтів.",
     pRebelvest: "Краудінвестингова платформа для сталої енергетики: онбординг інвесторів, чекаут та облік інвестицій у регульованому німецькому фінтеху.",
     pHagedoo: "Платформа великої німецької DIY-мережі, що з'єднує власників житла з перевіреними майстрами: SSR-анкети, підбір партнерів та пропозиції.",
     pBanger: "Блокчейн-ігровий хаб: турніри, лобі, механіки винагород та інтеграція з гаманцем.",
-    pPrimer: "Освітній застосунок для батьків дітей 4–14 років: керовані Q&A-сесії, нагадування та прогрес.",
-    pRocket: "Гейміфікована крипто-гра crash як Telegram mini app: ставки, множники, раунди в реальному часі, реферали.",
-    langTitle: "Мови",
-    langEn: "Англійська — Intermediate (B1)",
-    langNative: "Українська — рідна",
-    contactTitle: "Контакти",
     tInspect: "Платформа для інспекції нерухомості (США)",
     tPedestal: "No-code конструктор сайтів (Австралія)",
     tRebelvest: "Краудінвестингова платформа (Німеччина)",
     tHagedoo: "Маркетплейс майстрів (Німеччина)",
-    tBanger: "Ігровий хаб (Іспанія)"
+    tBanger: "Ігровий хаб (Іспанія)",
+    langTitle: "Мови",
+    langEn: "Англійська — Intermediate (B1)",
+    langNative: "Українська — рідна",
+    contactTitle: "Контакти",
+    counterLabel: "Ви відвідувач No.",
+    footerNote: "Ця сторінка вічно under construction."
   }
 };
 
@@ -251,14 +316,18 @@ setLang(localStorage.getItem('lang') || 'uk');
 
 function applyTheme(theme){
   document.documentElement.dataset.theme = theme;
-  document.getElementById('btn-theme').textContent = theme === 'light' ? 'Dark' : 'Light';
+  document.getElementById('btn-theme').textContent = theme === 'dark' ? 'Classic mode' : 'Hacker mode';
   localStorage.setItem('theme', theme);
 }
 function toggleTheme(){
-  applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+  applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 }
-applyTheme(localStorage.getItem('theme') ||
-  (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+applyTheme(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
+
+// ponytail: fake local hit counter, real analytics if it ever matters
+const hits = (+localStorage.getItem('hits') || 313370) + 1;
+localStorage.setItem('hits', hits);
+document.getElementById('counter').textContent = String(hits).padStart(6, '0');
 </script>
 </body>
 </html>
