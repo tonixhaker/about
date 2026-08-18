@@ -64,8 +64,9 @@
     font-size:2rem;
     background:linear-gradient(90deg,red,orange,#cc0,green,blue,purple);
     -webkit-background-clip:text; background-clip:text; color:transparent;
+    -webkit-text-stroke:1px #000;
   }
-  [data-theme="dark"] h1{background:none; color:#00ff00; text-shadow:0 0 6px #00ff00}
+  [data-theme="dark"] h1{background:none; color:#00ff00; text-shadow:0 0 6px #00ff00; -webkit-text-stroke:0}
   .role{font-style:italic; font-size:1.1rem}
   .blink{animation:blink 1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
