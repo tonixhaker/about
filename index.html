@@ -52,6 +52,12 @@
   table.projects td:last-child{border-left:none; border-radius:0 12px 12px 0; width:100%}
   .stack{font-family:"Courier New",monospace; font-size:.8rem; color:var(--muted); white-space:normal}
 
+  .preview{display:block; width:260px; height:160px; overflow:hidden; margin-bottom:8px;
+    border:1px solid var(--border); border-radius:8px; background:var(--panel)}
+  .preview iframe{width:1040px; height:640px; border:0; transform:scale(.25); transform-origin:0 0; pointer-events:none}
+
+  table.own td:last-child{vertical-align:middle}
+
   .center{text-align:center}
   footer{text-align:center; font-size:.85rem; color:var(--muted); padding:14px 0 4px}
   @media (max-width:600px){
@@ -120,6 +126,7 @@
   [data-theme="classic"] hr{border-top:2px inset var(--border-light)}
   [data-theme="classic"] table.projects{border-collapse:collapse; border-spacing:0}
   [data-theme="classic"] table.projects td{border:2px inset var(--border-light) !important; border-radius:0 !important; padding:6px 10px}
+  [data-theme="classic"] .preview{border:2px inset var(--border-light); border-radius:0}
   [data-theme="classic"] .badges{display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:10px 0}
   [data-theme="classic"] .badge{
     font-family:"MS Sans Serif",Tahoma,sans-serif; font-size:11px;
@@ -205,6 +212,13 @@
       <tr><td><b data-i18n="tBanger"></b><div class="stack">Nuxt, Laravel</div></td><td data-i18n="pBanger"></td></tr>
     </table>
 
+    <h2 data-i18n="ownTitle"></h2>
+    <table class="projects own">
+      <tr><td><a class="preview" href="https://tonixhaker.github.io/thundercam-legal/" target="_blank" rel="noopener"><iframe src="https://tonixhaker.github.io/thundercam-legal/" loading="lazy" tabindex="-1" title="ThunderCam" scrolling="no"></iframe></a><b><a href="https://apps.apple.com/app/id6802254806" target="_blank" rel="noopener">ThunderCam</a></b><div class="stack">iOS</div></td><td data-i18n="oThunder"></td></tr>
+      <tr><td><a class="preview" href="https://tonixhaker.github.io/cards-legal/" target="_blank" rel="noopener"><iframe src="https://tonixhaker.github.io/cards-legal/" loading="lazy" tabindex="-1" title="Kodnyk" scrolling="no"></iframe></a><b><a href="https://apps.apple.com/app/id6800781066" target="_blank" rel="noopener">Kodnyk</a></b><div class="stack">iOS</div></td><td data-i18n="oKodnyk"></td></tr>
+      <tr><td><a class="preview" href="https://tonixhaker.github.io/wod-timer-legal/" target="_blank" rel="noopener"><iframe src="https://tonixhaker.github.io/wod-timer-legal/" loading="lazy" tabindex="-1" title="WOD Clock" scrolling="no"></iframe></a><b><a href="https://apps.apple.com/app/id6802587907" target="_blank" rel="noopener">WOD Clock</a></b><div class="stack">iOS + Apple Watch</div></td><td data-i18n="oWod"></td></tr>
+    </table>
+
     <h2 data-i18n="langTitle"></h2>
     <div class="panel">
       <ul>
@@ -275,6 +289,10 @@ const T = {
     tRebelvest: "Crowdinvesting Platform (Germany)",
     tHagedoo: "Craftsmen Marketplace (Germany)",
     tBanger: "Gaming Hub (Spain)",
+    ownTitle: "Personal Projects",
+    oThunder: "Automatic lightning camera: watches the sky and saves a photo burst the instant lightning flashes. Fully offline, no account.",
+    oKodnyk: "Loyalty card wallet: scan a plastic card once, show a crisp barcode at checkout. Offline, syncs between devices.",
+    oWod: "Minimalist workout timer with voice cues — AMRAP, EMOM, Tabata and more. iPhone and Apple Watch, fully offline.",
     langTitle: "Languages",
     langEn: "English — Intermediate (B1)",
     langNative: "Ukrainian — native",
@@ -321,6 +339,10 @@ const T = {
     tRebelvest: "Краудінвестингова платформа (Німеччина)",
     tHagedoo: "Маркетплейс майстрів (Німеччина)",
     tBanger: "Ігровий хаб (Іспанія)",
+    ownTitle: "Власні проєкти",
+    oThunder: "Автоматична камера блискавок: стежить за небом і зберігає серію фото в мить спалаху. Повністю офлайн, без акаунта.",
+    oKodnyk: "Гаманець карток лояльності: скануєш пластикову картку один раз — показуєш чіткий штрихкод на касі. Офлайн, синхронізація між пристроями.",
+    oWod: "Мінімалістичний таймер тренувань з голосовими підказками — AMRAP, EMOM, Tabata та інші. iPhone і Apple Watch, повністю офлайн.",
     langTitle: "Мови",
     langEn: "Англійська — Intermediate (B1)",
     langNative: "Українська — рідна",
